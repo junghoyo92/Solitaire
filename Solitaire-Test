@@ -1,0 +1,17 @@
+from tabular import Tabular
+from random import randint
+suits = "CDHS"
+cvalues = list("AKQJ") + list(str(i) for i in range(2, 11))
+deck = [cv + cs for cs in suits for cv in cvalues]
+columns =[list() for i in range(10)]
+def main():
+    for c in deck:
+       columns[randint(0,9)].append(c)
+    height = max(len(c) for c in columns)
+    table = Tabular(
+                [("  %s  " % letter, "^", "{0}") for letter in "0123456789"],
+                ([(c[i] if i < len(c) else "") for c in columns] for i in range(height))
+            )
+    print("{0}".format(table))
+if __name__ == "__main__":
+    main()
